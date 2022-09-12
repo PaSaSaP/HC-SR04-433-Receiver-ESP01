@@ -36,8 +36,12 @@ void loop() {
     }
 
     for (uint8_t i = 0; i < dataLength; ++i) {
-      if (SerialEnabled) Serial.println((int)data[i], HEX);
+      if (SerialEnabled) {
+        if (data[i] < 0x10) Serial.print('0');
+        Serial.print((int)data[i], HEX);
+      }
       buffAdd(data[i]);
     }
+    if (SerialEnabled) Serial.println();
   }
 }
